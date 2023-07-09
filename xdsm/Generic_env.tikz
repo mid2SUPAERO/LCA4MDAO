@@ -1,0 +1,139 @@
+
+%%% Preamble Requirements %%%
+% \usepackage{geometry}
+% \usepackage{amsfonts}
+% \usepackage{amsmath}
+% \usepackage{amssymb}
+% \usepackage{tikz}
+
+% Optional packages such as sfmath set through python interface
+% \usepackage{sfmath}
+
+% \usetikzlibrary{arrows,chains,positioning,scopes,shapes.geometric,shapes.misc,shadows}
+
+%%% End Preamble Requirements %%%
+
+\input{"/home/dmsm/t.bellier/anaconda3/envs/LCA_Module/lib/python3.9/site-packages/pyxdsm/diagram_styles"}
+\begin{tikzpicture}
+
+\matrix[MatrixSetup]{
+%Row 0
+\node [DataIO] (output_input) {$\bar{x^{*}}$};&
+\node [DataIO] (output_mda) {$\bar{y^{*}}$};&
+&
+&
+&
+&
+&
+\\
+%Row 1
+\node [Optimization] (input) {$\text{Optimizer}$};&
+&
+\node [DataInter] (input-Discipline) {$\bar{x}$};&
+\node [DataInter] (input-Env) {$\bar{x}$};&
+\node [DataInter] (input-Obj) {$\bar{x}$};&
+\node [DataInter] (input-Cons) {$\bar{x}$};&
+&
+\\
+%Row 2
+&
+\node [MDA] (mda) {$\text{MDA}$};&
+\node [DataInter] (mda-Discipline) {$\bar{y}$};&
+\node [DataInter] (mda-Env) {$\bar{y}$};&
+\node [DataInter] (mda-Obj) {$\bar{y}$};&
+\node [DataInter] (mda-Cons) {$\bar{y}$};&
+&
+\\
+%Row 3
+&
+\node [DataInter] (Discipline-mda) {$\bar{y^{*}}$};&
+\node [Group] (Discipline) {$\begin{array}{c}\text{Technical} \\ \text{Disciplines}\end{array}$};&
+\node [DataInter] (Discipline-Env) {$\bar{z}$};&
+\node [DataInter] (Discipline-Obj) {$\bar{z}$};&
+\node [DataInter] (Discipline-Cons) {$\bar{z}$};&
+&
+\\
+%Row 4
+&
+&
+&
+\node [Function] (Env) {$\text{LCA}$};&
+\node [DataInter] (Env-Obj) {$\bar{y_e}$};&
+\node [DataInter] (Env-Cons) {$\bar{y_e}$};&
+&
+\\
+%Row 5
+\node [DataInter] (Obj-input) {$f_t,f_e$};&
+&
+&
+&
+\node [ImplicitGroup] (Obj) {$\text{Objectives}$};&
+&
+&
+\node [DataIO] (right_output_Obj) {$f_t,f_e$};\\
+%Row 6
+\node [DataInter] (Cons-input) {$\bar{c_t},\bar{c_e}$};&
+&
+&
+&
+&
+\node [ImplicitGroup] (Cons) {$\text{Constraints}$};&
+&
+\node [DataIO] (right_output_Cons) {$\bar{c_t},\bar{c_e}$};\\
+%Row 7
+&
+&
+&
+&
+&
+&
+&
+\\
+};
+
+% XDSM process chains
+
+
+\begin{pgfonlayer}{data}
+\path
+% Horizontal edges
+(input) edge [DataLine] (input-Discipline)
+(mda) edge [DataLine] (mda-Discipline)
+(input) edge [DataLine] (input-Obj)
+(mda) edge [DataLine] (mda-Obj)
+(input) edge [DataLine] (input-Cons)
+(mda) edge [DataLine] (mda-Cons)
+(Discipline) edge [DataLine] (Discipline-Obj)
+(Discipline) edge [DataLine] (Discipline-Cons)
+(Discipline) edge [DataLine] (Discipline-mda)
+(Obj) edge [DataLine] (Obj-input)
+(Cons) edge [DataLine] (Cons-input)
+(input) edge [DataLine] (input-Env)
+(mda) edge [DataLine] (mda-Env)
+(Discipline) edge [DataLine] (Discipline-Env)
+(Env) edge [DataLine] (Env-Obj)
+(Env) edge [DataLine] (Env-Cons)
+(Obj) edge [DataLine] (right_output_Obj)
+(Cons) edge [DataLine] (right_output_Cons)
+% Vertical edges
+(input-Discipline) edge [DataLine] (Discipline)
+(mda-Discipline) edge [DataLine] (Discipline)
+(input-Obj) edge [DataLine] (Obj)
+(mda-Obj) edge [DataLine] (Obj)
+(input-Cons) edge [DataLine] (Cons)
+(mda-Cons) edge [DataLine] (Cons)
+(Discipline-Obj) edge [DataLine] (Obj)
+(Discipline-Cons) edge [DataLine] (Cons)
+(Discipline-mda) edge [DataLine] (mda)
+(Obj-input) edge [DataLine] (input)
+(Cons-input) edge [DataLine] (input)
+(input-Env) edge [DataLine] (Env)
+(mda-Env) edge [DataLine] (Env)
+(Discipline-Env) edge [DataLine] (Env)
+(Env-Obj) edge [DataLine] (Obj)
+(Env-Cons) edge [DataLine] (Cons)
+(input) edge [DataLine] (output_input)
+(mda) edge [DataLine] (output_mda);
+\end{pgfonlayer}
+
+\end{tikzpicture}

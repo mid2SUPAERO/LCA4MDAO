@@ -1,0 +1,105 @@
+
+%%% Preamble Requirements %%%
+% \usepackage{geometry}
+% \usepackage{amsfonts}
+% \usepackage{amsmath}
+% \usepackage{amssymb}
+% \usepackage{tikz}
+
+% Optional packages such as sfmath set through python interface
+% \usepackage{sfmath}
+
+% \usetikzlibrary{arrows,chains,positioning,scopes,shapes.geometric,shapes.misc,shadows}
+
+%%% End Preamble Requirements %%%
+
+\input{"/home/dmsm/t.bellier/anaconda3/envs/LCA_Module/lib/python3.9/site-packages/pyxdsm/diagram_styles"}
+\begin{tikzpicture}
+
+\matrix[MatrixSetup]{
+%Row 0
+\node [DataIO] (output_D1) {$x,z_1,z_2$};&
+\node [DataIO] (output_D2) {$z_1,z_2$};&
+\node [DataIO] (output_Obj) {$x,z_1$};&
+&
+&
+&
+\\
+%Row 1
+\node [Function] (D1) {$\begin{array}{c}\text{Discipline 1} \\ y_1 = z_{1}^{2}+z_2+x_1-0.2y_2\end{array}$};&
+\node [DataInter] (D1-D2) {$y_1$};&
+\node [DataInter] (D1-Obj) {$y_1$};&
+\node [DataInter] (D1-C1) {$y_1$};&
+&
+&
+\\
+%Row 2
+\node [DataInter] (D2-D1) {$y_2$};&
+\node [Function] (D2) {$\begin{array}{c}\text{Discipline 2} \\ y_2=\sqrt{y_{1}}+z_1+z_2\end{array}$};&
+\node [DataInter] (D2-Obj) {$y_2$};&
+&
+\node [DataInter] (D2-C2) {$y_2$};&
+&
+\\
+%Row 3
+&
+&
+\node [ImplicitFunction] (Obj) {$\begin{array}{c}\text{Objective} \\ f=x^{2}+z_1+y_1+e^{-y_2}\end{array}$};&
+&
+&
+&
+\node [DataIO] (right_output_Obj) {$f$};\\
+%Row 4
+&
+&
+&
+\node [ImplicitFunction] (C1) {$\begin{array}{c}\text{Constraint 1} \\ g_1=3.16-y_1\end{array}$};&
+&
+&
+\node [DataIO] (right_output_C1) {$g_1$};\\
+%Row 5
+&
+&
+&
+&
+\node [ImplicitFunction] (C2) {$\begin{array}{c}\text{Constraint 2} \\ g_2=y_2-24.0\end{array}$};&
+&
+\node [DataIO] (right_output_C2) {$g_2$};\\
+%Row 6
+&
+&
+&
+&
+&
+&
+\\
+};
+
+% XDSM process chains
+
+
+\begin{pgfonlayer}{data}
+\path
+% Horizontal edges
+(D1) edge [DataLine] (D1-D2)
+(D1) edge [DataLine] (D1-Obj)
+(D1) edge [DataLine] (D1-C1)
+(D2) edge [DataLine] (D2-D1)
+(D2) edge [DataLine] (D2-Obj)
+(D2) edge [DataLine] (D2-C2)
+(Obj) edge [DataLine] (right_output_Obj)
+(C1) edge [DataLine] (right_output_C1)
+(C2) edge [DataLine] (right_output_C2)
+% Vertical edges
+(D1-D2) edge [DataLine] (D2)
+(D1-Obj) edge [DataLine] (Obj)
+(D1-C1) edge [DataLine] (C1)
+(D2-D1) edge [DataLine] (D1)
+(D2-Obj) edge [DataLine] (Obj)
+(D2-C2) edge [DataLine] (C2)
+(D1) edge [DataLine] (output_D1)
+(Obj) edge [DataLine] (output_Obj)
+(D2) edge [DataLine] (output_D2);
+\end{pgfonlayer}
+
+\end{tikzpicture}

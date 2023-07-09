@@ -1,0 +1,6 @@
+*.csv
+*.html
+*.pyc
+*.png
+.idea/*
+tests/*
