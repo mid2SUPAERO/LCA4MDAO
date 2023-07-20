@@ -264,6 +264,7 @@ class PymooDriver(Driver):
         pymoo_problem = OpenMDAOProblem(problem, self._designvars)
         res = minimize(pymoo_problem, algo, self.options['termination'], verbose=self.options['verbose'])
         self.result = res
+        # TODO Check possible conversion to nicer format
         self.fail = not res.success
         if pymoo_problem.n_obj <= 1:
             pymoo_problem.evaluate(res.X)

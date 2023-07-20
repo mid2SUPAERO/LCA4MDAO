@@ -1,10 +1,9 @@
 import openmdao.api as om
 import numpy as np
 import pandas as pd
-from pymoo.termination.default import DefaultSingleObjectiveTermination, DefaultMultiObjectiveTermination
-from pymoo.termination.ftol import MultiObjectiveSpaceTermination
+from pymoo.termination.default import DefaultMultiObjectiveTermination
 
-from optimizer.pymoo_optimizer import PymooDriver
+from lca4mdao.optimizer import PymooDriver
 from sellar import SellarDis1, SellarDis2
 from lca import GWP
 from database import setup_ecoinvent, build_data
