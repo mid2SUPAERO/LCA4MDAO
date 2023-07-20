@@ -4,11 +4,13 @@
 
 ## Installation
 
-### Requirements
+### Dependencies
 
-#### Brightway2
+#### Brightway2 (Opensource)
 
-#### OpenMDAO
+#### OpenMDAO (Opensource)
+
+#### Ecoinvent (licence) or ???
 
 ## Usage
 
