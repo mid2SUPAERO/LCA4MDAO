@@ -49,14 +49,8 @@ if __name__ == '__main__':
     print(res.opt.get("X"))
 
     results = np.array(res.opt.get("F")).T
-
     plt.scatter(results[0, :], results[1, :])
-
-    # results[1:-1].plot.scatter("GWP", "obj")
     ax = plt.gca()
-    # results[0:1].plot.scatter("GWP", "obj", color=sns.color_palette()[2], ax=ax, label='overall GWP minimum')
-    # results[-1:].plot.scatter("GWP", "obj", color=sns.color_palette()[1], ax=ax,
-    #                           label='Sellar problem objective minimum')
     ax.set_xlabel(r'global warming potential impact ($kg CO_{2} eq$)')
     ax.set_ylabel(r'Sellar problem objective function')
     plt.legend()
