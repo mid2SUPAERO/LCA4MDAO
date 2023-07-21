@@ -187,6 +187,10 @@ class MdaoParameter(ParameterBase):
         obj.update(self.data)
         return obj
 
+    @staticmethod
+    def clean():
+        MdaoParameter.delete().where(True).execute()
+
 
 class MdaoParameterManager(ParameterManager):
     def __init__(self):
@@ -257,6 +261,10 @@ class MdaoParameterManager(ParameterManager):
         }]
         self.new_mdao_parameters(data, overwrite=True)
 
+    def clean_mdao_parameters(self):
+        with self.db.atomic():
+            MdaoParameter.clean()
+
     def rename_mdao_parameter(self, parameter, new_name, update_dependencies=False):
         """ Given a parameter and a new name, safely update the parameter.
 
@@ -308,10 +316,6 @@ class MdaoParameterManager(ParameterManager):
                 continue
             ActivityParameter.recalculate(obj.name)
             ActivityParameter.recalculate_exchanges(obj.name)
-
-
-def _add_lca_parameter(key, name, unit, parent):  # TODO (maybe)
-    pass
 
 
 parameters = MdaoParameterManager()

@@ -2,7 +2,7 @@ import numpy as np
 from bw2data.parameters import Group, ActivityParameter
 from openmdao.api import ExplicitComponent
 import brightway2 as bw
-from .parameter import _add_lca_parameter, MdaoParameter, parameters
+from .parameter import MdaoParameter, parameters
 
 
 class LcaCalculationComponent(ExplicitComponent):

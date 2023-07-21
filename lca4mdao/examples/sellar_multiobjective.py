@@ -5,11 +5,13 @@ from matplotlib import pyplot as plt
 from pymoo.termination.default import DefaultMultiObjectiveTermination
 
 from lca4mdao.optimizer import PymooDriver
-from sellar import SellarMDA, build_data, setup_bw
+from lca4mdao.utilities import cleanup_parameters, setup_bw
+from sellar import SellarMDA, build_data
 
 if __name__ == '__main__':
-    setup_bw()
+    setup_bw("Example")
     build_data()
+    cleanup_parameters()
     prob = om.Problem()
     prob.model = SellarMDA()
 

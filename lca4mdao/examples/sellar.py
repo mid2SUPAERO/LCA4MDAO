@@ -3,7 +3,7 @@ import openmdao.api as om
 import numpy as np
 
 from lca4mdao.component import LcaCalculationComponent
-from lca4mdao.parameter import MdaoParameter
+from lca4mdao.utilities import cleanup_parameters, setup_bw
 from lca4mdao.variable import ExplicitComponentLCA
 
 methane = ('biosphere3', '6b1b495b-70ee-4be6-b1c2-3031aa4d6add')
@@ -11,18 +11,11 @@ carbon_dioxide = ('biosphere3', '16eeda8a-1ea2-408e-ab37-2648495058dd')
 method_key = ('ReCiPe Midpoint (H) V1.13', 'climate change', 'GWP100')
 
 
-def setup_bw():
-    bw.projects.set_current("Example")
-    bw.bw2setup()
-    print(bw.projects.report())
-
-
 def build_data():
     sellar = bw.Database('sellar')
     sellar.register()
     sellar.delete(warn=False)
     sellar.new_activity('sellar_problem', name='sellar problem').save()
-    MdaoParameter.delete().where(True).execute()
 
 
 class SellarDis1(ExplicitComponentLCA):
@@ -134,8 +127,9 @@ class SellarMDA(om.Group):
 
 
 if __name__ == '__main__':
-    setup_bw()
+    setup_bw("Example")
     build_data()
+    cleanup_parameters()
 
     prob = om.Problem()
     prob.model = SellarMDA()

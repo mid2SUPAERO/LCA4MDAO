@@ -3,7 +3,7 @@ import warnings
 import numpy as np
 from openmdao.api import ExplicitComponent
 import brightway2 as bw
-from .parameter import _add_lca_parameter, parameters
+from .parameter import parameters
 
 
 class ExplicitComponentLCA(ExplicitComponent):

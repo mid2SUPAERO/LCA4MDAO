@@ -3,31 +3,14 @@ import openmdao.api as om
 import numpy as np
 
 from lca4mdao.component import LcaCalculationComponent
-from lca4mdao.parameter import MdaoParameter
+from lca4mdao.utilities import cleanup_parameters, setup_ecoinvent, setup_bw
 from lca4mdao.variable import ExplicitComponentLCA
 
+# File path for ecoinvent datasets
 fp = '/home/dmsm/t.bellier/Documents/Code/BE_LCA/datasets_old'
 wood = ('ecoinvent 3.8 cutoff', 'a63dd664a99c9e82c192f8c50a9b4cfb')
 steel = ('ecoinvent 3.8 cutoff', '580b7aea44c188e5958b4c6bd6ec515a')
 method_key = ('ReCiPe Midpoint (H) V1.13', 'climate change', 'GWP100')
-
-
-def setup_bw():
-    bw.projects.set_current("Example")
-    bw.bw2setup()
-    print(bw.projects.report())
-
-
-def setup_ecoinvent():
-    if bw.Database("ecoinvent 3.8 cutoff").random() is None:
-        ei = bw.SingleOutputEcospold2Importer(fp, "ecoinvent 3.8 cutoff")
-        ei.apply_strategies()
-        ei.statistics()
-        ei.write_database()
-    else:
-        print("ecoinvent 3.8 cutoff already imported")
-    ecoinvent = bw.Database("ecoinvent 3.8 cutoff")
-    print(ecoinvent.random())
 
 
 def build_data():
@@ -35,7 +18,6 @@ def build_data():
     sellar.register()
     sellar.delete(warn=False)
     sellar.new_activity('sellar_problem', name='sellar problem').save()
-    MdaoParameter.delete().where(True).execute()
 
 
 class SellarDis1(ExplicitComponentLCA):
@@ -145,9 +127,10 @@ class SellarMDA(om.Group):
 
 
 if __name__ == '__main__':
-    setup_bw()
-    setup_ecoinvent()
+    setup_bw("Example")
+    setup_ecoinvent(fp, "ecoinvent 3.8 cutoff")
     build_data()
+    cleanup_parameters()
 
     prob = om.Problem()
     prob.model = SellarMDA()
