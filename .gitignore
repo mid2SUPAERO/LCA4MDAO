@@ -4,3 +4,6 @@
 *.png
 .idea/*
 tests/*
+build/*
+dist/*
+*.egg-info/*
