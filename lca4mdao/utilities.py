@@ -2,7 +2,7 @@ from warnings import warn
 
 import brightway2 as bw
 
-from lca4mdao.parameter import parameters
+from lca4mdao.parameter import parameters, MdaoParameterManager
 
 
 def setup_bw(project_name):
@@ -23,4 +23,5 @@ def setup_ecoinvent(fp, name="ecoinvent", overwrite=False):
 
 
 def cleanup_parameters():
+    # TODO fix database selection problem
     parameters.clean_mdao_parameters()

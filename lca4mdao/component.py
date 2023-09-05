@@ -44,6 +44,7 @@ class LcaCalculationComponent(ExplicitComponent):
     def _setup_procs(self, pathname, comm, mode, prob_meta):
         super()._setup_procs(pathname, comm, mode, prob_meta)
         # TODO check dependency chain if multiple LCA modules
+        # TODO check units at that stage
         for name, param in MdaoParameter.load().items():
             self.add_input(param["mdao_name"], val=param["amount"], tags='lca')
         self.declare_partials(['*'], ['*'], method='fd')

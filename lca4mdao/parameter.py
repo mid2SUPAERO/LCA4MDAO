@@ -3,6 +3,7 @@ import os
 from asteval import Interpreter
 from bw2data import projects, config
 from bw2data.backends.peewee import ExchangeDataset
+from bw2data.database import Database
 from bw2data.parameters import ParameterManager, ParameterBase, Group, databases, get_new_symbols, DatabaseParameter, \
     ActivityParameter, ProjectParameter, alter_parameter_formula, nonempty, ParameterizedExchange, GroupDependency
 from bw2data.sqlite import PickleField, SubstitutableDatabase
@@ -262,6 +263,10 @@ class MdaoParameterManager(ParameterManager):
         self.new_mdao_parameters(data, overwrite=True)
 
     def clean_mdao_parameters(self):
+        for parameter in ActivityParameter.select().where(ActivityParameter.group == 'lca4mdao'):
+            database = parameter.database
+            for activity in Database(database):
+                self.remove_from_group('lca4mdao', activity.key)
         with self.db.atomic():
             MdaoParameter.clean()
 
