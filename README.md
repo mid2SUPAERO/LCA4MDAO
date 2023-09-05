@@ -59,5 +59,5 @@ PhD supervisor: [Joseph Morlier](mailto:joseph.morlier@isae-suapero.fr)
 
 Aerobest conference paper [AerobestPaper](https://hal.science/hal-04188708)
 
-Aerobest slides [AerobestSlides](https://github.com/mid2SUPAERO/LCA4MDAO/blob/master/Aerobest20LCA4MDAO_JO-compressed.pdf) 
+Aerobest slides [AerobestSlides](https://github.com/mid2SUPAERO/LCA4MDAO/blob/master/Aerobest%20LCA4MDAO_JO-compressed.pdf) 
 
