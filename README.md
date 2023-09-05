@@ -57,4 +57,22 @@ PhD supervisor: [Joseph Morlier](mailto:joseph.morlier@isae-suapero.fr)
 
 ## Citation
 
-Aerobest conference paper incoming...
+@inproceedings{bellier:hal-04188708,
+  TITLE = {{INTEGRATION OF LIFE CYCLE ASSESSMENT METHODOLOGY AS AN ENVIRONMENT DISCIPLINE MODULE IN MULTIDISCIPLINARY ANALYSIS AND OPTIMIZATION FRAMEWORK}},
+  AUTHOR = {Bellier, Thomas and Morlier, Joseph and Bil, Cees and Urbano, Annafederica and Pudsey, Adrian},
+  URL = {https://hal.science/hal-04188708},
+  BOOKTITLE = {{II ECCOMAS Thematic Conference on Multidisciplinary Design Optimization of Aerospace Systems (Aerobest 2023)}},
+  ADDRESS = {Lisboa, Portugal},
+  ORGANIZATION = {{ECCOMAS Portugal}},
+  HAL_LOCAL_REFERENCE = {MS2M},
+  PAGES = {102-119},
+  YEAR = {2023},
+  MONTH = Jul,
+  KEYWORDS = {environment ; life cycle ; sustainability ; Multidisciplinary design optimization ; ecodesign ; aircraft design},
+  PDF = {https://hal.science/hal-04188708/file/AeroBest2023_proceedings%20Bellier.pdf},
+  HAL_ID = {hal-04188708},
+  HAL_VERSION = {v1},
+}
+Aerobest conference paper [AerobestPaper](https://hal.science/hal-04188708)
+Aerobest slides [AerobestSlides](https://github.com/mid2SUPAERO/LCA4MDAO/blob/master/Aerobest%20LCA4MDAO_JO-compressed.pdf) 
+
