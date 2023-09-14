@@ -52,8 +52,8 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 ## Contact
 
-Author: [Thomas Bellier](mailto:thomas.bellier@isae-suapero.fr)  
-PhD supervisor: [Joseph Morlier](mailto:joseph.morlier@isae-suapero.fr)
+Author: [Thomas Bellier](mailto:thomas.bellier@isae-supaero.fr)  
+PhD supervisor: [Joseph Morlier](mailto:joseph.morlier@isae-supaero.fr)
 
 ## Citation
 
