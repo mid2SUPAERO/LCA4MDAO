@@ -74,7 +74,7 @@ class Environment(ExplicitComponentLCA):
                         lca_key=battery, val=0.)
         self.add_output('aluminium', units='kg', lca_parent=("aircraft", "hybrid_aircraft"), lca_units='kilogram',
                         lca_key=aluminium, val=0.)
-        self.add_output('electricity', units='kW * h', lca_parent=("aircraft", "hybrid_flight"), lca_units='kilowatthour',
+        self.add_output('electricity', units='kW * h', lca_parent=("aircraft", "hybrid_flight"), lca_units='kilowatt hour',
                         lca_key=electricity, val=0.)
         self.add_output('amount_kerosene', units='kg', lca_name="kerosene", lca_parent=("aircraft", "hybrid_flight"), lca_units='kilogram',
                         lca_key=kerosene, val=0.)
@@ -109,7 +109,7 @@ class Environment(ExplicitComponentLCA):
 class GWP(LcaCalculationComponent):
     def setup(self):
         self.add_lca_output('GWP', {("aircraft", "hybrid_aircraft"): 1, ("aircraft", "hybrid_flight"): 1},
-                            method_key=('ReCiPe Midpoint (H) V1.13', 'climate change', 'GWP100'))
+                            method_key=('ReCiPe Midpoint (H) V1.13', 'climate change', 'GWP100'), units='kg')
 
 
 class ElectricTwinAnalysisGroup(Group):

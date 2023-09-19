@@ -23,5 +23,10 @@ def setup_ecoinvent(fp, name="ecoinvent", overwrite=False):
 
 
 def cleanup_parameters():
-    # TODO fix database selection problem
     parameters.clean_mdao_parameters()
+
+
+def convert_units(lca_unit):
+    unit = lca_unit
+    return unit
+

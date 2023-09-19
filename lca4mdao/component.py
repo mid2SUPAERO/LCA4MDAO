@@ -48,4 +48,5 @@ class LcaCalculationComponent(ExplicitComponent):
         for name, param in MdaoParameter.load().items():
             self.add_input(param["mdao_name"], val=param["amount"], tags='lca')
         self.declare_partials(['*'], ['*'], method='fd')
+        # TODO partials
 
