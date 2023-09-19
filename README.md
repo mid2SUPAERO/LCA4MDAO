@@ -52,9 +52,12 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 ## Contact
 
-Author: [Thomas Bellier](mailto:thomas.bellier@isae-suapero.fr)  
-Manager: [Joseph Morlier](mailto:joseph.morlier@isae-suapero.fr)
+Author: [Thomas Bellier](mailto:thomas.bellier@isae-supaero.fr)  
+PhD supervisor: [Joseph Morlier](mailto:joseph.morlier@isae-supaero.fr)
 
 ## Citation
 
-Aerobest conference paper incoming...
+Aerobest conference paper [AerobestPaper](https://hal.science/hal-04188708)
+
+Aerobest slides [AerobestSlides](https://github.com/mid2SUPAERO/LCA4MDAO/blob/master/Aerobest%20LCA4MDAO_JO-compressed.pdf) 
+
