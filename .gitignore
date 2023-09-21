@@ -2,8 +2,9 @@
 *.html
 *.pyc
 *.png
-.idea/*
-tests/*
-build/*
-dist/*
-*.egg-info/*
+.idea/
+tests/
+build/
+dist/
+*.egg-info/
+!lca4mdao/data/
