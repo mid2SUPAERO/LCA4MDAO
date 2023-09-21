@@ -1,0 +1,14 @@
+pyxdsm~=2.3.0
+openmdao~=3.25.0
+brightway2~=2.4.1
+numpy~=1.24.2
+bw2data~=3.6.6
+pandas~=1.5.3
+pymoo~=0.6.0.1
+peewee~=3.16.0
+openconcept~=1.1.0
+scipy~=1.10.1
+asteval~=0.9.29
+bw2parameters~=0.7
+importlib_resources~=5.12.0
+setuptools~=67.6.0

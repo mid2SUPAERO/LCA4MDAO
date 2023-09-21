@@ -1,4 +1,5 @@
 import os
+import warnings
 
 from asteval import Interpreter
 from bw2data import projects, config
@@ -22,6 +23,7 @@ class MdaoParameter(ParameterBase):
         * name: str, unique
         * formula: str, optional
         * amount: float, optional
+        * units: str, optional
         * data: object, optional. Used for any other metadata.
 
     Note that there is no magic for reading and writing to ``data`` (unlike ``Activity`` objects) - it must be used directly.
@@ -30,6 +32,7 @@ class MdaoParameter(ParameterBase):
     name = TextField(index=True, unique=True)
     formula = TextField(null=True)
     amount = FloatField(null=True)
+    units = TextField(null=True)
     data = PickleField(default={})
 
     _old_name = "'lca4mdao'"
@@ -184,6 +187,7 @@ class MdaoParameter(ParameterBase):
             'name': self.name,
             'formula': self.formula,
             'amount': self.amount,
+            'units': self.units
         })
         obj.update(self.data)
         return obj
@@ -215,6 +219,7 @@ class MdaoParameterManager(ParameterManager):
                 'name': name of variable (unique),
                 'amount': numeric value of variable (optional),
                 'formula': formula in Python as string (optional),
+                'units': unit used in openMDAO (optional)
                 optional keys like uncertainty, etc. (no limitations)
             }]
 
@@ -231,6 +236,7 @@ class MdaoParameterManager(ParameterManager):
                 'name': ds.pop('name'),
                 'amount': ds.pop('amount', 0),
                 'formula': ds.pop('formula', None),
+                'units': ds.pop('units', None),
                 'data': ds
             }
 
@@ -252,23 +258,29 @@ class MdaoParameterManager(ParameterManager):
             Group.get_or_create(name='lca4mdao')[0].expire()
             MdaoParameter.recalculate()
 
-    def new_mdao_parameter(self, lca_name, val=0., mdao_name=None):
+    def new_mdao_parameter(self, lca_name, val=0., mdao_name=None, units=None):
         if mdao_name is None:
             mdao_name = lca_name
         data = [{
             'name': lca_name,
             'amount': val,
             'mdao_name': mdao_name,
+            'units': units,
         }]
         self.new_mdao_parameters(data, overwrite=True)
 
-    def clean_mdao_parameters(self):
+    def clean_mdao_parameters(self, safe=True):
         for parameter in ActivityParameter.select().where(ActivityParameter.group == 'lca4mdao'):
             database = parameter.database
             for activity in Database(database):
                 self.remove_from_group('lca4mdao', activity.key)
         with self.db.atomic():
             MdaoParameter.clean()
+        if not safe:
+            warnings.warn('Cleaning in unsafe mode, dropping and rebuilding table.')
+            MdaoParameter.drop_table()
+            MdaoParameter.create_table()
+
 
     def rename_mdao_parameter(self, parameter, new_name, update_dependencies=False):
         """ Given a parameter and a new name, safely update the parameter.

@@ -129,7 +129,7 @@ class SellarMDA(om.Group):
 if __name__ == '__main__':
     setup_bw("Example")
     build_data()
-    cleanup_parameters()
+    cleanup_parameters(safe=False)
 
     prob = om.Problem()
     prob.model = SellarMDA()

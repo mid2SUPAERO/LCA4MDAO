@@ -1,4 +1,5 @@
 *.csv
+!lca4mdao/data/*.csv
 *.html
 *.pyc
 *.png
@@ -7,4 +8,3 @@ tests/
 build/
 dist/
 *.egg-info/
-!lca4mdao/data/

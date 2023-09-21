@@ -4,6 +4,7 @@ import numpy as np
 from openmdao.api import ExplicitComponent
 import brightway2 as bw
 from .parameter import parameters
+from .utilities import convert_units
 
 
 class ExplicitComponentLCA(ExplicitComponent):
@@ -22,7 +23,6 @@ class ExplicitComponentLCA(ExplicitComponent):
                     lca_units = 'unit'
                 else:
                     lca_units = units
-            # TODO add unit conversion and check
             try:
                 check_unit = bw.get_activity(lca_key).get('unit')
             except KeyError:
@@ -34,8 +34,9 @@ class ExplicitComponentLCA(ExplicitComponent):
             for exc in activity.exchanges():
                 if exc.input == lca_key:
                     exc.delete()
+            lca_units = convert_units(lca_units)
             activity.new_exchange(input=lca_key, amount=val, formula=lca_name, type=exchange_type).save()
-            parameters.new_mdao_parameter(lca_name, val, name)
+            parameters.new_mdao_parameter(lca_name, val, name, lca_units)
             parameters.add_exchanges_to_group("lca4mdao", activity)
 
         return super().add_output(name, val=val, shape=shape, units=units,
